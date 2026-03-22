@@ -1,0 +1,7 @@
+# =============================================================================
+# Development / Test Dependencies
+# Install with: pip install -r requirements-dev.txt --break-system-packages
+# =============================================================================
+
+pytest==8.0.0
+pytest-cov==4.1.0        # Optional: coverage reporting

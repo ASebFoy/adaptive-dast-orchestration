@@ -1,0 +1,7 @@
+Action,Total_Count,Mean,Min,Max,StdDev
+authenticate,10,1,1,1,0.0
+run_spider,10,1,1,1,0.0
+run_ajax_spider,11,1.1,1,2,0.32
+run_active_scan,174,17.4,10,20,2.8
+declare_completion,248,24.8,10,33,6.36
+get_alerts,24,2.4,0,5,1.51

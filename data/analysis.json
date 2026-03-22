@@ -1,0 +1,581 @@
+{
+  "metadata": {
+    "analysis_timestamp": "",
+    "evaluation_file": "./results/evaluation_10runs.json",
+    "n_baseline_runs": 10,
+    "n_agent_runs": 10,
+    "alpha": 0.05
+  },
+  "hypothesis_tests": {
+    "H1_recall": {
+      "hypothesis": "H1: Agent achieves higher recall than baseline",
+      "test": "Mann-Whitney U (one-sided: agent > baseline)",
+      "baseline_mean": 0.286,
+      "agent_mean": 0.429,
+      "improvement": 0.143,
+      "improvement_pct": 50.02,
+      "u_statistic": 100.0,
+      "p_value": 7.968955844033122e-06,
+      "alpha": 0.05,
+      "significant": true,
+      "effect_size": {
+        "delta": 1.0,
+        "magnitude": "large",
+        "abs_delta": 1.0,
+        "interpretation": {
+          "direction": "agent_favored",
+          "strength": "large"
+        }
+      },
+      "verdict": "SUPPORTED"
+    },
+    "H2_precision": {
+      "hypothesis": "H2: Agent maintains precision within 10pp of baseline",
+      "test": "Equivalence test (\u00b110pp threshold)",
+      "baseline_mean": 1.0,
+      "agent_mean": 1.0,
+      "difference_pp": 0.0,
+      "threshold_pp": 10,
+      "within_threshold": true,
+      "effect_size": {
+        "delta": 0.0,
+        "magnitude": "negligible",
+        "abs_delta": 0.0,
+        "interpretation": {
+          "direction": "equal",
+          "strength": "negligible"
+        }
+      },
+      "verdict": "SUPPORTED"
+    },
+    "H3a_http_volume": {
+      "hypothesis": "H3a: Agent produces different HTTP request volume than baseline",
+      "test": "Mann-Whitney U (two-sided)",
+      "baseline_mean": 1503.8,
+      "agent_mean": 39412.0,
+      "difference": 37908.2,
+      "difference_pct": 2520.83,
+      "u_statistic": 0.0,
+      "p_value": 0.00018165114609146497,
+      "alpha": 0.05,
+      "significant": true,
+      "effect_size": {
+        "delta": 1.0,
+        "magnitude": "large",
+        "abs_delta": 1.0,
+        "interpretation": {
+          "direction": "agent_favored",
+          "strength": "large"
+        }
+      },
+      "verdict": "SUPPORTED"
+    },
+    "H3b_efficiency": {
+      "hypothesis": "H3b: Agent improves detection efficiency by \u226525%",
+      "test": "Mann-Whitney U (one-sided: agent > baseline)",
+      "baseline_mean": 1.331,
+      "agent_mean": 0.077,
+      "improvement": -1.253,
+      "improvement_pct": -94.19,
+      "threshold_pct": 25,
+      "u_statistic": 0.0,
+      "p_value": 0.9999341331544295,
+      "alpha": 0.05,
+      "significant": false,
+      "meets_threshold": false,
+      "effect_size": {
+        "delta": -1.0,
+        "magnitude": "large",
+        "abs_delta": 1.0,
+        "interpretation": {
+          "direction": "baseline_favored",
+          "strength": "large"
+        }
+      },
+      "verdict": "NOT_SUPPORTED"
+    }
+  },
+  "descriptive_statistics": {
+    "baseline": {
+      "recall": {
+        "mean": 0.286,
+        "std": 0.0,
+        "cv": 0.0,
+        "values": [
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286,
+          0.286
+        ]
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0,
+        "cv": 0.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "http_requests": {
+        "mean": 1503.8,
+        "std": 36.4,
+        "cv": 2.42,
+        "values": [
+          1456,
+          1472,
+          1494,
+          1503,
+          1499,
+          1595,
+          1498,
+          1503,
+          1502,
+          1516
+        ]
+      },
+      "efficiency": {
+        "mean": 1.331,
+        "std": 0.031,
+        "cv": 2.34,
+        "values": [
+          1.374,
+          1.359,
+          1.339,
+          1.331,
+          1.334,
+          1.254,
+          1.335,
+          1.331,
+          1.332,
+          1.319
+        ]
+      }
+    },
+    "agent": {
+      "recall": {
+        "mean": 0.429,
+        "std": 0.0,
+        "cv": 0.0,
+        "values": [
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429,
+          0.429
+        ]
+      },
+      "precision": {
+        "mean": 1.0,
+        "std": 0.0,
+        "cv": 0.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "http_requests": {
+        "mean": 39412.0,
+        "std": 4491.9,
+        "cv": 11.4,
+        "values": [
+          39582,
+          41723,
+          39530,
+          39481,
+          43698,
+          27326,
+          39598,
+          41826,
+          39516,
+          41840
+        ]
+      },
+      "efficiency": {
+        "mean": 0.077,
+        "std": 0.012,
+        "cv": 15.13,
+        "values": [
+          0.076,
+          0.072,
+          0.076,
+          0.076,
+          0.069,
+          0.11,
+          0.076,
+          0.072,
+          0.076,
+          0.072
+        ]
+      },
+      "cost_usd": {
+        "mean": 0.0,
+        "std": 0.0,
+        "total": 0,
+        "values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "enhanced_analyses": {
+    "path_comparison": {
+      "baseline": {
+        "path": [
+          "passiveScan-config",
+          "spider",
+          "spiderAjax",
+          "passiveScan-wait",
+          "activeScan-config",
+          "activeScan",
+          "report"
+        ],
+        "steps": 7,
+        "fixed": true,
+        "all_runs_identical": true,
+        "description": "ZAP Automation Framework fixed pipeline"
+      },
+      "agent": {
+        "runs": [
+          {
+            "run_id": 10,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 1,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 2,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 3,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 4,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 5,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 6,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 7,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 8,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 9,
+            "path": [],
+            "total_iterations": 0,
+            "termination_reason": "unknown"
+          }
+        ],
+        "statistics": {
+          "unique_paths": 1,
+          "path_diversity_score": 0.1,
+          "most_common_path": [],
+          "mean_iterations": 0.0,
+          "min_iterations": 0,
+          "max_iterations": 0,
+          "std_iterations": 0.0,
+          "iterations_per_action": {},
+          "action_success_rates": {},
+          "termination_reasons": {
+            "unknown": 10
+          }
+        }
+      }
+    },
+    "time_efficiency": {
+      "baseline": {
+        "runs": [
+          {
+            "run_id": 1,
+            "duration_minutes": 60.08,
+            "http_requests": 0
+          },
+          {
+            "run_id": 2,
+            "duration_minutes": 60.09,
+            "http_requests": 0
+          },
+          {
+            "run_id": 3,
+            "duration_minutes": 60.06,
+            "http_requests": 0
+          },
+          {
+            "run_id": 4,
+            "duration_minutes": 60.05,
+            "http_requests": 0
+          },
+          {
+            "run_id": 5,
+            "duration_minutes": 60.06,
+            "http_requests": 0
+          },
+          {
+            "run_id": 6,
+            "duration_minutes": 60.03,
+            "http_requests": 0
+          },
+          {
+            "run_id": 7,
+            "duration_minutes": 60.07,
+            "http_requests": 0
+          },
+          {
+            "run_id": 8,
+            "duration_minutes": 60.05,
+            "http_requests": 0
+          },
+          {
+            "run_id": 9,
+            "duration_minutes": 60.07,
+            "http_requests": 0
+          },
+          {
+            "run_id": 10,
+            "duration_minutes": 60.07,
+            "http_requests": 0
+          }
+        ],
+        "statistics": {
+          "mean_duration_minutes": 60.06,
+          "min_duration": 60.03,
+          "max_duration": 60.09,
+          "std_duration": 0.02,
+          "cv_duration": 0.03,
+          "mean_http_requests": 0.0,
+          "std_http_requests": 0.0,
+          "requests_per_minute": 0.0
+        }
+      },
+      "agent": {
+        "runs": [
+          {
+            "run_id": 1,
+            "duration_minutes": 59.05,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 2,
+            "duration_minutes": 60.19,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 3,
+            "duration_minutes": 58.94,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 4,
+            "duration_minutes": 58.37,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 5,
+            "duration_minutes": 60.26,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 6,
+            "duration_minutes": 60.15,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 7,
+            "duration_minutes": 59.46,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 8,
+            "duration_minutes": 58.99,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 9,
+            "duration_minutes": 57.89,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          },
+          {
+            "run_id": 10,
+            "duration_minutes": 60.2,
+            "http_requests": 0,
+            "termination_reason": "unknown"
+          }
+        ],
+        "statistics": {
+          "mean_duration_minutes": 59.35,
+          "min_duration": 57.89,
+          "max_duration": 60.26,
+          "std_duration": 0.84,
+          "cv_duration": 1.42,
+          "mean_http_requests": 0.0,
+          "std_http_requests": 0.0,
+          "requests_per_minute": 0.0,
+          "early_terminations": 10,
+          "timeout_terminations": 0,
+          "iteration_limit_terminations": 0
+        }
+      },
+      "comparison": {
+        "duration_difference_minutes": -0.71,
+        "duration_improvement_pct": -1.18,
+        "agent_faster": true,
+        "http_requests_difference": 0,
+        "efficiency_note": "Agent terminates early when appropriate"
+      }
+    },
+    "failure_modes": {
+      "ground_truth": {
+        "total": 0,
+        "by_type": {},
+        "by_difficulty": {},
+        "by_endpoint": {}
+      },
+      "baseline": {
+        "detected_ids": [],
+        "detected_count": 0,
+        "recall": 0
+      },
+      "agent": {
+        "detected_ids": [],
+        "detected_count": 0,
+        "recall": 0
+      },
+      "venn_diagram_data": {
+        "both_found": [],
+        "only_baseline": [],
+        "only_agent": [],
+        "both_missed": []
+      },
+      "pattern_analysis": {
+        "both_found": {
+          "count": 0,
+          "pattern": "No vulnerabilities in 'both_found' category"
+        },
+        "only_baseline": {
+          "count": 0,
+          "pattern": "No vulnerabilities in 'only_baseline' category"
+        },
+        "only_agent": {
+          "count": 0,
+          "pattern": "No vulnerabilities in 'only_agent' category"
+        },
+        "both_missed": {
+          "count": 0,
+          "pattern": "No vulnerabilities in 'both_missed' category"
+        }
+      }
+    },
+    "authentication_impact": {
+      "design_difference": {
+        "baseline_authenticates": false,
+        "agent_authenticates": true
+      },
+      "authentication_execution": {
+        "agent_auth_attempts": 0,
+        "agent_auth_successes": 0,
+        "agent_auth_success_rate": 0,
+        "baseline_auth_attempts": 0
+      },
+      "auth_gated_vulnerabilities": {
+        "in_ground_truth": [],
+        "count": 0,
+        "baseline_found": 0,
+        "agent_found": 0,
+        "note": "Auth-gated vulnerabilities require authenticated session to access endpoints"
+      },
+      "coverage_impact": {
+        "baseline_urls_discovered_avg": 0.0,
+        "agent_urls_discovered_avg": 0.0,
+        "authenticated_url_advantage": 0.0,
+        "authenticated_url_pct_increase": 0
+      },
+      "detection_impact": {
+        "vulnerabilities_requiring_auth": [],
+        "agent_unique_finds": [],
+        "agent_advantage_count": 0,
+        "conclusion": "No unique vulnerabilities attributed solely to authentication"
+      }
+    },
+    "completion_declarations": {
+      "runs_with_declarations": 0,
+      "note": "No completion declarations found. Feature may not have been enabled during these runs."
+    }
+  }
+}

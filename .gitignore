@@ -1,0 +1,41 @@
+# =============================================================================
+# Adaptive DAST Orchestration — .gitignore
+# =============================================================================
+
+# Secrets & environment
+.env
+_env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Experiment runtime outputs (generated during runs)
+results/
+reports/
+
+# Logs
+*.log
+
+# Reference papers (copyrighted — do not commit)
+*.pdf
+
+# Jupyter
+.ipynb_checkpoints/

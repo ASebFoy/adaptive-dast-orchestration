@@ -1,0 +1,86 @@
+# =============================================================================
+# Docker Compose Configuration for Thesis Experiment
+# Adaptive DAST Orchestration: LLM-Driven Vulnerability Discovery
+# =============================================================================
+#
+# Usage:
+#   docker-compose up -d          # Start services
+#   docker-compose down -v        # Stop and remove (clean slate)
+#   docker-compose logs -f zap    # View ZAP logs
+#
+# Services:
+#   - juice-shop: OWASP Juice Shop v17.1.1 (target application)
+#   - zap: OWASP ZAP 2.15.0 (scanner)
+#
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # Target Application: OWASP Juice Shop
+  # ===========================================================================
+  juice-shop:
+    image: bkimminich/juice-shop:v17.1.1
+    container_name: thesis-juice-shop
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - thesis-network
+
+  # ===========================================================================
+  # Scanner: OWASP ZAP
+  # ===========================================================================
+  zap:
+    image: zaproxy/zap-stable:2.15.0
+    container_name: thesis-zap
+    ports:
+      - "127.0.0.1:8080:8080"   # CHANGED: Only localhost can access
+      - "127.0.0.1:8090:8090"   # CHANGED: Only localhost can access
+    # Run ZAP daemon with API enabled
+    command: >
+      zap.sh -daemon
+      -host 0.0.0.0
+      -port 8080
+      -config api.disablekey=false
+      -config api.key=${ZAP_API_KEY:-thesis-zap-api-key}
+      -config api.addrs.addr.name=.*
+      -config api.addrs.addr.regex=true
+      -config connection.timeoutInSecs=120
+      -config scanner.threadPerHost=2
+    environment:
+      - ZAP_API_KEY=${ZAP_API_KEY:-thesis-zap-api-key}
+      - JAVA_OPTS=-Xmx2g
+    volumes:
+      # Mount reports directory for output
+      - ./reports:/zap/reports:rw
+      # Mount automation framework configs
+      - ./configs:/zap/configs:ro
+    depends_on:
+      - juice-shop
+    restart: unless-stopped
+    networks:
+      - thesis-network
+
+networks:
+  thesis-network:
+    driver: bridge
+
+# =============================================================================
+# Volume Configuration Notes:
+# =============================================================================
+# The setup uses bind mounts for:
+#   - ./reports: ZAP scan reports (created automatically)
+#   - ./configs: ZAP automation framework YAML files
+#
+# To use:
+#   1. Create configs/ directory and place zap-injection-baseline.yaml inside
+#   2. Set ZAP_API_KEY environment variable (or use default)
+#   3. Run: docker-compose up -d
+#   4. Wait for health checks to pass
+#   5. Access ZAP API at http://localhost:8080
+#   6. Access Juice Shop at http://localhost:3000
+# =============================================================================

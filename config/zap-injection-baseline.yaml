@@ -1,0 +1,285 @@
+# =============================================================================
+# OWASP ZAP Automation Framework Configuration
+# Thesis Baseline: Injection Vulnerability Detection Only
+# Target: OWASP Juice Shop (http://juice-shop:3000)
+# ZAP Version: 2.15.0
+# =============================================================================
+# 
+# Purpose: This configuration establishes the baseline condition for comparing
+# traditional static DAST execution against LLM-driven agentic orchestration.
+# The active scan policy is restricted to injection vulnerabilities only to
+# ensure alignment with the thesis scope and ground truth comparison.
+#
+# Enabled Vulnerability Classes:
+#   - SQL Injection (all database variants)
+#   - NoSQL Injection (MongoDB)
+#   - OS Command Injection
+#   - Server-Side Template Injection (SSTI)
+#   - LDAP Injection
+#   - XPath Injection
+#   - XML External Entity (XXE)
+#
+# =============================================================================
+
+env:
+  contexts:
+    - name: "juice-shop"
+      urls:
+        - "http://juice-shop:3000"
+      includePaths:
+        - "http://juice-shop:3000.*"
+      excludePaths:
+        # Exclude static assets and non-functional paths
+        - ".*\\.js$"
+        - ".*\\.css$"
+        - ".*\\.png$"
+        - ".*\\.jpg$"
+        - ".*\\.jpeg$"
+        - ".*\\.gif$"
+        - ".*\\.svg$"
+        - ".*\\.ico$"
+        - ".*\\.woff2?$"
+        - ".*\\.ttf$"
+        - ".*\\.eot$"
+        - ".*socket\\.io.*"
+      authentication:
+        method: "json"
+        parameters:
+          loginPageUrl: "http://juice-shop:3000/rest/user/login"
+          loginRequestUrl: "http://juice-shop:3000/rest/user/login"
+          loginRequestBody: '{"email":"test@juice-sh.op","password":"test123"}'
+        verification:
+          method: "response"
+          loggedInRegex: "\\Qtoken\\E"
+          loggedOutRegex: "\\QUnauthorized\\E"
+      sessionManagement:
+        method: "cookie"
+        parameters: {}
+      technology:
+        exclude:
+          # Exclude technologies not relevant to Juice Shop
+          - "Db.Firebird"
+          - "Db.IBM DB2"
+          - "Db.SAP MaxDB"
+          - "Db.Sybase"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+
+jobs:
+  # ===========================================================================
+  # Job 1: Passive Scan Configuration
+  # ===========================================================================
+  - type: passiveScan-config
+    parameters:
+      maxAlertsPerRule: 10
+      scanOnlyInScope: true
+      maxBodySizeInBytesToScan: 10000
+    rules: []
+
+  # ===========================================================================
+  # Job 2: Traditional Spider
+  # ===========================================================================
+  - type: spider
+    parameters:
+      context: "juice-shop"
+      url: "http://juice-shop:3000"
+      maxDuration: 5
+      maxDepth: 10
+      maxChildren: 0
+      acceptCookies: true
+      handleODataParametersVisited: false
+      handleParameters: "USE_ALL"
+      maxParseSizeBytes: 2621440
+      parseComments: true
+      parseGit: false
+      parseRobotsTxt: true
+      parseSitemapXml: true
+      parseSVNEntries: false
+      postForm: true
+      processForm: true
+      requestWaitTime: 200
+      sendRefererHeader: true
+      threadCount: 2
+      userAgent: ""
+
+  # ===========================================================================
+  # Job 3: AJAX Spider (for JavaScript-rendered content)
+  # ===========================================================================
+  - type: spiderAjax
+    parameters:
+      context: "juice-shop"
+      url: "http://juice-shop:3000"
+      maxDuration: 10
+      maxCrawlDepth: 10
+      numberOfBrowsers: 1
+      browserId: "firefox-headless"
+      clickDefaultElems: true
+      clickElemsOnce: true
+      eventWait: 1000
+      maxCrawlStates: 0
+      maxDuration: 10
+      randomInputs: true
+      reloadWait: 1000
+
+  # ===========================================================================
+  # Job 4: Passive Scan Wait
+  # ===========================================================================
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 5
+
+  # ===========================================================================
+  # Job 5: Active Scan Policy Definition (Injection-Only)
+  # ===========================================================================
+  - type: activeScan-config
+    parameters:
+      maxRuleDurationInMins: 5
+      maxScanDurationInMins: 60
+      maxAlertsPerRule: 10
+      defaultPolicy: "injection-only"
+      attackStrength: "MEDIUM"
+      alertThreshold: "MEDIUM"
+    policyDefinition:
+      name: "injection-only"
+      defaultThreshold: "OFF"
+      defaultStrength: "MEDIUM"
+      rules:
+        # =====================================================================
+        # SQL INJECTION RULES (All Database Variants)
+        # =====================================================================
+        # 40018: SQL Injection (Generic/Error-based)
+        - id: 40018
+          name: "SQL Injection"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40019: SQL Injection - SQLite
+        - id: 40019
+          name: "SQL Injection - SQLite"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40020: SQL Injection - Hypersonic SQL
+        - id: 40020
+          name: "SQL Injection - Hypersonic SQL"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40021: SQL Injection - Oracle
+        - id: 40021
+          name: "SQL Injection - Oracle"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40022: SQL Injection - PostgreSQL
+        - id: 40022
+          name: "SQL Injection - PostgreSQL"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40023: SQL Injection - MySQL
+        - id: 40023
+          name: "SQL Injection - MySQL"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # 40024: SQL Injection - Microsoft SQL Server
+        - id: 40024
+          name: "SQL Injection - Microsoft SQL Server"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # NOSQL INJECTION RULES
+        # =====================================================================
+        # 40033: NoSQL Injection - MongoDB
+        - id: 40033
+          name: "NoSQL Injection - MongoDB"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # COMMAND INJECTION RULES
+        # =====================================================================
+        # 90020: Remote OS Command Injection
+        - id: 90020
+          name: "Remote OS Command Injection"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # TEMPLATE INJECTION RULES
+        # =====================================================================
+        # 90035: Server Side Template Injection
+        - id: 90035
+          name: "Server Side Template Injection"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # LDAP INJECTION RULES
+        # =====================================================================
+        # 40015: LDAP Injection
+        - id: 40015
+          name: "LDAP Injection"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # XPATH INJECTION RULES
+        # =====================================================================
+        # 90021: XPath Injection
+        - id: 90021
+          name: "XPath Injection"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+        
+        # =====================================================================
+        # XML EXTERNAL ENTITY (XXE) RULES
+        # =====================================================================
+        # 90023: XML External Entity Attack
+        - id: 90023
+          name: "XML External Entity Attack"
+          threshold: "MEDIUM"
+          strength: "MEDIUM"
+
+  # ===========================================================================
+  # Job 6: Active Scan Execution
+  # ===========================================================================
+  - type: activeScan
+    parameters:
+      context: "juice-shop"
+      policy: "injection-only"
+      maxRuleDurationInMins: 5
+      maxScanDurationInMins: 60
+      addQueryParam: false
+      defaultPolicy: "injection-only"
+      delayInMs: 0
+      handleAntiCSRFTokens: true
+      injectPluginIdInHeader: false
+      scanHeadersAllRequests: false
+      threadPerHost: 2
+
+  # ===========================================================================
+  # Job 7: Report Generation
+  # ===========================================================================
+  - type: report
+    parameters:
+      template: "traditional-json"
+      reportDir: "./reports"
+      reportFile: "juice-shop-injection-baseline-{{yyyy-MM-dd-HH-mm-ss}}"
+      reportTitle: "OWASP Juice Shop - Injection Vulnerability Baseline Scan"
+      reportDescription: "Baseline DAST scan for thesis experiment - injection vulnerabilities only"
+      displayReport: false
+    risks:
+      - high
+      - medium
+      - low
+      - info
+    confidences:
+      - high
+      - medium
+      - low
+      - falsePositive

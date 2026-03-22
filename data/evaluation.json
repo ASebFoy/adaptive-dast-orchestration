@@ -1,0 +1,1229 @@
+{
+  "ground_truth": {
+    "total_vulnerabilities": 8,
+    "effective_vulnerabilities": 7,
+    "auth_gated_excluded": 1,
+    "by_type": {
+      "sql_injection": 5,
+      "nosql_injection": 3
+    },
+    "endpoints": [
+      "/rest/user/login",
+      "/rest/products/search",
+      "/rest/track-order",
+      "/rest/products/reviews"
+    ]
+  },
+  "evaluation_rules": {
+    "sql_injection_rules": [
+      40018,
+      40019,
+      40020,
+      40021,
+      40022,
+      40023,
+      40024
+    ],
+    "nosql_injection_rules": [
+      40033
+    ],
+    "note": "Only alerts from these rules are evaluated. All other rules excluded."
+  },
+  "baseline": {
+    "condition": "baseline",
+    "num_runs": 10,
+    "aggregate": {
+      "recall": {
+        "mean": 0.2857,
+        "min": 0.2857,
+        "max": 0.2857,
+        "values": [
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857,
+          0.2857
+        ]
+      },
+      "precision": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "detection_efficiency": {
+        "mean": 1.3306,
+        "min": 1.2539,
+        "max": 1.3736,
+        "values": [
+          1.3736,
+          1.3587,
+          1.3387,
+          1.3307,
+          1.3342,
+          1.2539,
+          1.3351,
+          1.3307,
+          1.3316,
+          1.3193
+        ]
+      },
+      "http_requests": {
+        "mean": 1503.8,
+        "min": 1456,
+        "max": 1595,
+        "values": [
+          1456,
+          1472,
+          1494,
+          1503,
+          1499,
+          1595,
+          1498,
+          1503,
+          1502,
+          1516
+        ]
+      },
+      "duration_minutes": {
+        "mean": 60.06,
+        "min": 60.03,
+        "max": 60.09,
+        "values": [
+          60.08,
+          60.09,
+          60.06,
+          60.05,
+          60.06,
+          60.03,
+          60.07,
+          60.05,
+          60.07,
+          60.07
+        ]
+      },
+      "true_positives": {
+        "mean": 2.0,
+        "min": 2,
+        "max": 2,
+        "values": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "runs": [
+      {
+        "run_id": "10",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3736,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1456
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.08
+      },
+      {
+        "run_id": "1",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3587,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1472
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.09
+      },
+      {
+        "run_id": "2",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3387,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1494
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.06
+      },
+      {
+        "run_id": "3",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3307,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1503
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.05
+      },
+      {
+        "run_id": "4",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3342,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1499
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.06
+      },
+      {
+        "run_id": "5",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.2539,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1595
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.03
+      },
+      {
+        "run_id": "6",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3351,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1498
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.07
+      },
+      {
+        "run_id": "7",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3307,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1503
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.05
+      },
+      {
+        "run_id": "8",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3316,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1502
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.07
+      },
+      {
+        "run_id": "9",
+        "condition": "baseline",
+        "metrics": {
+          "recall": 0.2857,
+          "precision": 1.0,
+          "detection_efficiency": 1.3193,
+          "true_positives": 2,
+          "false_positives": 0,
+          "false_negatives": 5,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 2,
+          "total_raw_alerts": 2,
+          "http_requests": 1516
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-EPHEMERAL",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.07
+      }
+    ]
+  },
+  "agent": {
+    "condition": "agent",
+    "num_runs": 10,
+    "aggregate": {
+      "recall": {
+        "mean": 0.4286,
+        "min": 0.4286,
+        "max": 0.4286,
+        "values": [
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286,
+          0.4286
+        ]
+      },
+      "precision": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "detection_efficiency": {
+        "mean": 0.0773,
+        "min": 0.0687,
+        "max": 0.1098,
+        "values": [
+          0.0758,
+          0.0719,
+          0.0759,
+          0.076,
+          0.0687,
+          0.1098,
+          0.0758,
+          0.0717,
+          0.0759,
+          0.0717
+        ]
+      },
+      "http_requests": {
+        "mean": 39412.0,
+        "min": 27326,
+        "max": 43698,
+        "values": [
+          39582,
+          41723,
+          39530,
+          39481,
+          43698,
+          27326,
+          39598,
+          41826,
+          39516,
+          41840
+        ]
+      },
+      "duration_minutes": {
+        "mean": 59.35,
+        "min": 57.89,
+        "max": 60.26,
+        "values": [
+          59.05,
+          60.19,
+          58.94,
+          58.37,
+          60.26,
+          60.15,
+          59.46,
+          58.99,
+          57.89,
+          60.2
+        ]
+      },
+      "true_positives": {
+        "mean": 3.0,
+        "min": 3,
+        "max": 3,
+        "values": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    "runs": [
+      {
+        "run_id": 10,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0758,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 39582
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 59.05
+      },
+      {
+        "run_id": 1,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0719,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 41723
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.19
+      },
+      {
+        "run_id": 2,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0759,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 39530
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 58.94
+      },
+      {
+        "run_id": 3,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.076,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 39481
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 58.37
+      },
+      {
+        "run_id": 4,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0687,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 43698
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.26
+      },
+      {
+        "run_id": 5,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.1098,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 27326
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.15
+      },
+      {
+        "run_id": 6,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0758,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 39598
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 59.46
+      },
+      {
+        "run_id": 7,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0717,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 41826
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 58.99
+      },
+      {
+        "run_id": 8,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0759,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 39516
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 57.89
+      },
+      {
+        "run_id": 9,
+        "condition": "agent",
+        "metrics": {
+          "recall": 0.4286,
+          "precision": 1.0,
+          "detection_efficiency": 0.0717,
+          "true_positives": 3,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "effective_ground_truth": 7,
+          "total_evaluation_alerts": 3,
+          "total_raw_alerts": 3,
+          "http_requests": 41840
+        },
+        "matched_alerts": [
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-LOGIN"
+          },
+          {
+            "alert_name": "SQL Injection",
+            "alert_url": "http://juice-shop:3000/rest/user/login",
+            "alert_param": "email",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-EPHEMERAL"
+          },
+          {
+            "alert_name": "SQL Injection - SQLite",
+            "alert_url": "http://juice-shop:3000/rest/products/search?q=%27%28",
+            "alert_param": "q",
+            "alert_plugin_id": "40018",
+            "ground_truth_id": "SQLI-UNION-SCHEMA"
+          }
+        ],
+        "unmatched_alerts": [],
+        "detected_vulnerabilities": [
+          "SQLI-LOGIN",
+          "SQLI-UNION-SCHEMA",
+          "SQLI-EPHEMERAL"
+        ],
+        "missed_vulnerabilities": [
+          "SQLI-BLIND-CHRISTMAS",
+          "SQLI-USER-CREDS",
+          "NOSQLI-DOS",
+          "NOSQLI-EXFIL"
+        ],
+        "duration_minutes": 60.2
+      }
+    ]
+  },
+  "comparison": {
+    "recall_difference": 0.1429,
+    "precision_difference": 0.0,
+    "efficiency_difference": -1.2533,
+    "efficiency_improvement_pct": -94.19,
+    "request_difference": 37908.2
+  }
+}

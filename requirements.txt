@@ -1,0 +1,23 @@
+# =============================================================================
+# Python Dependencies for Thesis Experiment
+# Adaptive DAST Orchestration: LLM-Driven Vulnerability Discovery
+# =============================================================================
+# All versions pinned for reproducibility (pip freeze, 2026-01-XX)
+
+# Core dependencies
+zaproxy==0.3.2             # OWASP ZAP Python API client
+openai==1.58.1             # OpenAI API for GPT-4o
+requests==2.31.0           # HTTP client
+
+# Data analysis
+pandas==2.2.0              # Data manipulation
+numpy==1.26.4              # Numerical computing
+scipy==1.12.0              # Statistical tests (Mann-Whitney U)
+
+# Output and reporting
+tabulate==0.9.0            # Pretty table formatting
+matplotlib==3.8.2          # Plotting (optional, for visualization)
+
+# Utilities
+python-dotenv==1.0.1       # Environment variable management
+pyyaml==6.0.1              # YAML parsing for ZAP configs
